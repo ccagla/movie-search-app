@@ -52,13 +52,31 @@ function displayMovies(movies) {
         movies.forEach(movie => {
             const movieCard = document.createElement("div");
             movieCard.classList.add("movie-card");
-
+            card.dataset.id = movie.id;
             movieCard.innerHTML = `
             <img src="${movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/150"}" alt="${movie.Title}">
             <h3>${movie.Title}</h3>
       <p>${movie.Year}</p>
             `;
 
-            movieList.appendChild(movieCard)
+            movieList.appendChild(movieCard);
+
+            if (data.Response === "False") {
+                movieList.innerHTML = `
+                <p class="text-center text-red-600 font-semibold">Movie not found.Please try another word.</p>
+                `
+                return;
+                
+            }
         });
 }
+
+movieList.addEventListener("click", async function (e) {
+    const target = e.target.closest(".movie-card");
+
+    if (!target) return;
+
+    const movieId = target.dataset.id;
+    await fetchMovieDetails(movieId)
+    
+} )
