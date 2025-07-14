@@ -95,3 +95,32 @@ async function fetchMovieDetails(movieId) {
         console.log("Detaylar alınamadı:", error.message)
     }
 }
+
+function showMovieModal(movie) {
+    const existingModal = document.querySelector(".modal");
+
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    const modal = document.createElement("div");
+    modal.classList.add("modal");
+
+    modal.innerHTML = `
+    <div class="model-content">
+    <span class="close-btn">&times;</span>
+    <h2>${movie.Title}</h2>
+    <img src="${movie.Poster}" alt "${movie.Title}">
+    <p><strong>Year:</strong> ${movie.Year}</p>
+    <p><strong>Genre:</strong> ${movie.Genre}</p>
+    <p><strong>Plot:</strong> ${movie.Plot}</p>
+    </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    const closeBtn = modal.querySelector(".close-btn");
+    closeBtn.addEventListener("click", () => {
+        modal.remove();
+    });
+}
