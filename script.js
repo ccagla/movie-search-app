@@ -110,10 +110,11 @@ function showMovieModal(movie) {
     <div class="model-content">
     <span class="close-btn">&times;</span>
     <h2>${movie.Title}</h2>
-    <img src="${movie.Poster}" alt "${movie.Title}">
+    <img src="${movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/300x450?text=No+Image"}" alt="${movie.Title}" style="width: 100%; height: auto; border-radius: 6px;" />
     <p><strong>Year:</strong> ${movie.Year}</p>
     <p><strong>Genre:</strong> ${movie.Genre}</p>
     <p><strong>Plot:</strong> ${movie.Plot}</p>
+     <button class="close-btn">Close</button>
     </div>
     `;
 
