@@ -79,4 +79,19 @@ movieList.addEventListener("click", async function (e) {
     const movieId = target.dataset.id;
     await fetchMovieDetails(movieId)
     
-} )
+} );
+
+async function fetchMovieDetails(movieId) {
+    try {
+        const res = await fetch(`https://www.omdbapi.com/?apikey=e713582&s=${movieId}`);
+        const data = await res.json();
+
+
+        if (data.Response === "False") {
+            throw new Error("Details not found")
+        }
+        showMovieModal(data);
+    } catch (error) {
+        console.log("Detaylar alınamadı:", error.message)
+    }
+}
