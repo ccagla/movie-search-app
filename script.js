@@ -29,7 +29,8 @@ function showError(message) {
 
 async function fetchMovies(query) {
     try {
-       const res = await fetch(`https://www.omdbapi.com/?apikey=e713582&s=${query}`);
+      const res = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${query}`);
+
 
         const data = await res.json();
 
@@ -52,7 +53,7 @@ function displayMovies(movies) {
         movies.forEach(movie => {
             const movieCard = document.createElement("div");
             movieCard.classList.add("movie-card");
-            card.dataset.id = movie.id;
+            movieCard.dataset.id = movie.imdbID;
             movieCard.innerHTML = `
             <img src="${movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/150"}" alt="${movie.Title}">
             <h3>${movie.Title}</h3>
@@ -83,7 +84,8 @@ movieList.addEventListener("click", async function (e) {
 
 async function fetchMovieDetails(movieId) {
     try {
-        const res = await fetch(`https://www.omdbapi.com/?apikey=e713582&s=${movieId}`);
+       const res = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${movieId}`);
+
         const data = await res.json();
 
 
